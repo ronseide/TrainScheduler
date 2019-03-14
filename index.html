@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1, shrink-to-fit=no">
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Condiment|Oswald" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <title>All Aboard</title>
+</head>
+
+<body>
+    <div class="container-fluid" style="width:90%">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand bg-dark" href="#"> Ron Seide</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link">Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Navbar ends, spacer row begins -->
+        <div class="row">
+            <div class="col-md-12">
+                <p></p>
+            </div>
+        </div>
+        <!-- Spacer row between navbar and jumbotron begins -->
+        <div class="jumbotron" id="jumbotron">
+            <div class="row">
+                <div class="col-md-12"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <h1>All Aboard!</h1>
+                        <h6>Want to run a railroad?</h6>
+                        Time was, Americans would go from city to city via train. Streamlined locomotives would whisk
+                        people from grand station to grand station in a civilized manner befitting a nation coming into
+                        its own. But the golden age of passenger train travel, at least in the United States, was to be
+                        short-lived as airplanes rendered these “magic carpets made of steel” obsolete within a hundred
+                        years of their birth.
+                    </p>
+                    <p>But all is not lost: now you too can imagine yourself a titan of the rails with an imaginary
+                        stable of iron horses at your disposal. Click on the button below to add and name your train
+                        plus add a destination, a start time and a duration for the journey— we’ll calculate the next
+                        arrival time and time to arrival for you!
+                    </p>
+                    <p><a href="#gamePosition" id="startGame">Start</a></p>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <figure id="tvBlock">
+                        <img id="jumboPic" src="assets/images/train.jpg" class="figure-img" />
+                        <figcaption class="figure-caption-fluid">Wouldn't you like to run a couple of these babies?
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="col-md-12"><p><br></p>
+            </div>
+
+        </div>
+        <!-- Jumbotron ends, scheduler begins with the Add a Train column and the Timetable column -->
+        <div class="row">
+            <div class="col-md-12"></a>                
+            </div>
+            <div class="col-md-4">
+                <h6>Add a Train</h6>
+                <form>
+                    <div class="row">
+                        <label class="col-md-5" for="train-name-input">Train Name</label>
+                        <input class="col-md-5" type="text" id="train-name-input" placeholder="Any name">
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5" for="destination-input">Destination</label>
+                        <input class="col-md-5" type="text" id="destination-input" placeholder="Any desination">
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5" for="first-train-input">First Train Time</label>
+                        <input class="col-md-5" type="text" id="first-train-input" placeholder="Mil. time, HH:mm">
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5" for="frequency-input">Frequency</label>
+                        <input class="col-md-5" type="text" id="frequency-input" placeholder="In minutes">
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><button type="submit" class="btn btn-light" id="add-train-btn">Submit</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8">
+                <h6>Timetable</h6>
+                <table id='train-table' class="table">
+                    <thead>
+                        <tr>
+                            <th>Train Name <br> </th>
+                            <th>Destination <br> </th>
+                            <th>Frequency (Minutes)</th>
+                            <th>Next Arrival <br> </th>
+                            <th>Minutes Away <br> </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row"></div>
+        <div class="col-md-12"><p><br><br><br><br><br><br></p></div>
+
+
+        <div class="row">
+            <div class="col-md-12"><a name="gamePosition"></a>
+                <footer class="sticky-bottom">
+                    <p>Copyright &copy; 2019</p>
+                </footer>
+            </div>
+        </div> <!-- Game closes. -->
+        <!-- Container-Fluid Closes -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    </div>
+    </div>
+
+</body>
+
+</html>
